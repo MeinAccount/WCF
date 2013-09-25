@@ -291,7 +291,7 @@ class TemplateScriptingCompiler {
 			'meta' => array(
 				'include' => $this->staticIncludes
 			),
-			'template' => $compiledAutoloadPlugins.$compiledContent
+			'template' => preg_replace('/\s+/', ' ', $compiledAutoloadPlugins.$compiledContent)
 		);
 	}
 	
