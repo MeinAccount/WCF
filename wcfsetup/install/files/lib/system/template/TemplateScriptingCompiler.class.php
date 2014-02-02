@@ -291,8 +291,22 @@ class TemplateScriptingCompiler {
 			'meta' => array(
 				'include' => $this->staticIncludes
 			),
-			'template' => preg_replace('/\s+/', ' ', str_replace(array('//<![CDATA[', '//]]>'), '', $compiledAutoloadPlugins.$compiledContent))
+			'template' => $this->minifyTemplate($compiledAutoloadPlugins.$compiledContent)
 		);
+	}
+	
+	/**
+	 * Minifies compiled templates
+	 * 
+	 * @param	string	$template
+	 * @return	string
+	 */
+	public function minifyTemplate($template) {
+		if (ENABLE_DEBUG_MODE) {
+			return $template;
+		}
+		
+		return preg_replace('/\s+/', ' ', str_replace(array('//<![CDATA[', '//]]>'), '', $template));
 	}
 	
 	/**
