@@ -68,6 +68,14 @@ class LinkHandler extends SingletonFactory {
 		$isACP = $originIsACP = RequestHandler::getInstance()->isACPRequest();
 		$encodeTitle = $forceWCF = $isRaw = false;
 		$appendSession = true;
+		
+		// enforce a certain level of sanitation and protection for links embedded in emails
+		if (isset($parameters['isEmail']) && (bool)$parameters['isEmail']) {
+			$parameters['forceFrontend'] = true;
+			$parameters['appendSession'] = false;
+			unset($parameters['isEmail']);
+		}
+		
 		if (isset($parameters['application'])) {
 			$abbreviation = $parameters['application'];
 		}
@@ -118,11 +126,7 @@ class LinkHandler extends SingletonFactory {
 				$controller = 'Index';
 			}
 			else {
-				// build link to landing page
-				$landingPage = PageMenu::getInstance()->getLandingPage();
-				$controller = $landingPage->getController();
-				$abbreviation = $landingPage->getApplication();
-				$url = $landingPage->menuItemLink;
+				return PageMenu::getInstance()->getLandingPage()->getProcessor()->getLink();
 			}
 		}
 		
