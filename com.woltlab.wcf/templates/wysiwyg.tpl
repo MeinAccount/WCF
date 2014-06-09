@@ -55,7 +55,6 @@ $(function() {
 			{/if}
 		};
 
-		// collapse toolbar on smartphones
 		if ($.browser.mobile && !navigator.userAgent.match(/iPad/)) {
 			$config.toolbarCanCollapse = true;
 			$config.toolbarStartupExpanded = false;
@@ -82,7 +81,6 @@ $(function() {
 	});
 	
 	head.ready('CKEditorCore', function() {
-		// prevent double editor initialization if used in combination with divarea-plugin
 		CKEDITOR.disableAutoInline = true;
 	});
 });

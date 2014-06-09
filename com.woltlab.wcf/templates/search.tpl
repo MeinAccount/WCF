@@ -136,7 +136,7 @@
 	//<![CDATA[
 	$(function() {
 		new WCF.Search.User($('#searchAuthor'), function(data) {
-			$('#searchAuthor').val(data.label);//.focus();
+			$('#searchAuthor').val(data.label);
 		});
 	});
 	//]]>
